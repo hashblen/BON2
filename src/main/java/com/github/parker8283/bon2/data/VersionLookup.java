@@ -16,12 +16,15 @@ public enum VersionLookup {
 
     INSTANCE;
 
-    private static final String VERSION_JSON = "http://export.mcpbot.bspk.rs/versions.json";
+    private static final String VERSION_JSON = "http://export.mcpbot.golde.org/versions.json";
     private static final Gson GSON = new GsonBuilder().create();
 
     private VersionJson jsoncache;
 
     public String getVersionFor(String version) {
+        if(version.contains("-")){
+            version = version.substring(0, version.indexOf('-'));
+        }
         if (jsoncache != null) {
             for (String s : jsoncache.getVersions()) {
                 MappingsJson mappings = jsoncache.getMappings(s);
